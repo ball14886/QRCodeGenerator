@@ -4,16 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 358px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-        Link : <asp:TextBox ID="txtCode" runat="server"></asp:TextBox><br /><br />
-        Width : <asp:TextBox ID="txtWidth" runat="server"></asp:TextBox><br /><br />
-        Height : <asp:TextBox ID="txtHeight" runat="server"></asp:TextBox><br /><br />
+        Width and Height (px) : <asp:TextBox ID="txtWidthHeight" runat="server"></asp:TextBox><br />
+        Location to save file : <input id="folderSelector" class="auto-style1" name="folderSelector" title="folderSelector" type="file" /><br />
         <asp:Button ID="btnGenerate" runat="server" Text="Generate" OnClick="btnGenerate_Click" />
-        <br /><br />
-        <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
     </div>
     </form>
 </body>
