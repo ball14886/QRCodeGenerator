@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace QRCodeGenerator
 {
@@ -26,6 +28,10 @@ namespace QRCodeGenerator
 
             foreach (var info in infos)
             {
+                int widthHeight = Convert.ToInt32(txtWidthHeight.Text.Trim());
+                int fontSize = 12;
+                int startX = (widthHeight / 2) - (widthHeight / 20);
+                int startY = widthHeight - (fontSize * 2);
                 WebResponse response = default(WebResponse);
                 Stream remoteStream = default(Stream);
                 StreamReader readStream = default(StreamReader);
@@ -36,7 +42,15 @@ namespace QRCodeGenerator
                 remoteStream = response.GetResponseStream();
                 readStream = new StreamReader(remoteStream);
                 System.Drawing.Image img = System.Drawing.Image.FromStream(remoteStream);
-                img.Save($"C:/Projects/MillionCreation/Participants/Ozone/{ info.RunnerBIB }.png");
+
+                Bitmap bitMapImage = new Bitmap(img);
+                Graphics graphicImage = Graphics.FromImage(bitMapImage);
+                graphicImage.DrawString(info.RunnerBIB.ToString(), new Font("Arial", fontSize, FontStyle.Bold), SystemBrushes.WindowText, new Point(startX, startY));
+                Response.ContentType = "image/jpeg";
+                bitMapImage.Save($"E:/Projects/MillionCreation/QRCode/{ info.RunnerBIB }.png", ImageFormat.Jpeg);
+
+                graphicImage.Dispose();
+                bitMapImage.Dispose();
                 response.Close();
                 remoteStream.Close();
                 readStream.Close();
