@@ -23,7 +23,7 @@ namespace QRCodeGenerator
             List<RunnerInfo> infos = new List<RunnerInfo>();
             using (RunningDatabaseDataContext r = new RunningDatabaseDataContext())
             {
-                infos = r.RunnerInfos.Where(x => x.RunnerID >= 5676).ToList();
+                infos = r.RunnerInfos.Where(x => x.RunnerID >= 11731).ToList();
             }
 
             foreach (var info in infos)
@@ -47,7 +47,7 @@ namespace QRCodeGenerator
                 Graphics graphicImage = Graphics.FromImage(bitMapImage);
                 graphicImage.DrawString(info.RunnerBIB.ToString(), new Font("Arial", fontSize, FontStyle.Bold), SystemBrushes.WindowText, new Point(startX, startY));
                 Response.ContentType = "image/jpeg";
-                bitMapImage.Save($"E:/Projects/MillionCreation/QRCode/{ info.RunnerBIB }.png", ImageFormat.Jpeg);
+                bitMapImage.Save($"E:/Projects/MillionCreation/QRCode3/{ info.RunnerBIB }.png", ImageFormat.Jpeg);
 
                 graphicImage.Dispose();
                 bitMapImage.Dispose();
